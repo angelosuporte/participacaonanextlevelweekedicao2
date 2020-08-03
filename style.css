@@ -1,4 +1,5 @@
 :root {
+    /*variáveis css */
     --color-background: #F0F0F7;
     --color-primary-lighter: #9871F5;
     --color-primary-light: #916BEA;
@@ -18,5 +19,22 @@
     --color-box-base: #FFFFFF;
     --color-box-footer: #FAFAFC;
     --color-small-info: #C1BCCC;
+
+    /* tamanho da font padrão: 16px ou 100% ou 1rem */
     font-size: 60%; /* controle das medidas rem */
+}/*
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}*/
+#container {
+    /*modelo de caixa*/
+    border: 1px solid red;
+    padding: 40px;
+    margin: 60px;
+
+    width: 300px;
+    height: 300px;
+    
 }
