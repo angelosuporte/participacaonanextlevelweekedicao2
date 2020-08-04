@@ -31,14 +31,14 @@
 
 .buttons-container {
     display: flex;
-    justify-content: center;
+    justify-content: center; /*sera sobrescrito quando tiver em tela grande por flex start impementado mais adiante*/
     margin: 3.2rem 0;
 }
 .buttons-container a {
     width: 30rm;
     height: 10.4rem;
 
-    border-radius: 0.8rem;
+    border-radius: .8rem;
     margin-right: 1.6rem;
 
     font: 700 2.4rem Arquivo;
@@ -89,5 +89,33 @@
 @media (min-width: 1100px) {
     #page-landing #container {
         max-width: 1100px; /*vai esticar o layout*/
+        display: grid;
+        grid-template-columns: 2fr 1fr 2fr;
+        grid-template-rows: 350px 1fr;
+        grid-template-areas: /*definindo areas estratégicas para os elementos conforme abaixo*/
+        "proffy image image"
+        "button button texting";
+        gap: 60px;
     }
+
+.logo-container {
+    grid-area: proffy;
+    text-align: initial;
+    align-self: center; /*mantem o ogo dentro do grid*/
+}
+
+.logo-container img {
+    height: 100%;
+}
+.hero-image {
+    grid-area: image;
+}
+.buttons-container {
+    grid-area: button;
+    justify-content: flex-start; /*ira sobreescrever o o justify-content: center quando estiver em telas grandes*/
+}
+.total-connections {
+    grid-area: texting;
+    justify-self: end;
+}
 }
