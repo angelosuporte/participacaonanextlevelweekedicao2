@@ -30,7 +30,7 @@
 }
 html,
 body{
-    height: 100vh;
+    height: 100vh; /* altura*/
 }
 
 body{
@@ -40,4 +40,18 @@ body{
     align-items: center;
     justify-content: center;
 }
+  /*estilizacao nas fontes dos itens abaixo */
+body,
+input,
+button,
+textarea {
+    font: 500 1.6rem Poppins;
+    color: var(--color-text-base);
+}
+
+#container { 
+    /*responsividade no container*/
+    width: 90vw; /*largura*/
+    max-width: 700px; /* se passar de 90vw o maximo da largura será 700px*/
     
+}
