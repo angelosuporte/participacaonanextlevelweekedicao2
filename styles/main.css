@@ -53,5 +53,10 @@ textarea {
     /*responsividade no container*/
     width: 90vw; /*largura*/
     max-width: 700px; /* se passar de 90vw o maximo da largura será 700px*/
-    
+}
+
+@media (min-width: 700px) { /*a partir deste valor será esta @media*/
+    :root {
+        font-size: 62.5%; /* todo 1rem vai ser proporcional a 10px*/
+    }
 }
