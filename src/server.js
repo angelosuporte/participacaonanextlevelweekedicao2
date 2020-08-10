@@ -1,3 +1,4 @@
+//Servidor
 const Database = require('./database/db')
 
 const express = require('express')
@@ -17,9 +18,12 @@ nunjucks.configure('src/views', {
 server
 //recebermos dados do req.body
 .use(express.urlencoded({ extended: true }))
+//arquivos estáticos (css, scripts, imagens)
 .use(express.static("public"))
+//rotas
 .get("/", pageLanding)
 .get("/study", pageStudy)
 .get("/give-classes", pageGiveClasses)
 .post("/save-class", saveClasses)
+//start
 .listen(5500)
