@@ -1,9 +1,9 @@
-const Database = require('./database/db.js')
+const Database = require('./database/db')
 
-const { subjects, weekdays, getSubject, convertHoursToMinutes,} = require('./utils/format')
+const { subjects, weekdays, getSubject, convertHoursToMinutes } = require('./utils/format')
 
 
-function pageLanding(req, res) {
+async function pageLanding(req, res) {
     return res.render("index.html")
 }
 
@@ -29,18 +29,20 @@ async function pageStudy(req, res) {
             AND class_schedule.time_from <= ${timeToMinutes}
             AND class_schedule.time_to > ${timeToMinutes}
         )
-        AND classes.subject = '${filters.subject}
+        AND classes.subject = '${filters.subject}' 
     `
 
     //caso houver erro na consulta ao db. Lembra da promessa?
 
     try {
         const db = await Database
-        const proffys = await db.call(query)
+        const proffys = await db.all(query)
+
+        proffys.map((proffy) => {
+            proffy.subject = getSubject(proffy.subject)
+        })
         
         return res.render('study.html', { proffys, subjects, filters, weekdays })
-
-
 
     } catch (error) { 
         console.log(error)
@@ -51,9 +53,9 @@ async function pageStudy(req, res) {
 function pageGiveClasses(req, res) {
     return res.render("give-classes.html", {subjects, weekdays })
 }
-
+//<<------------------------------------------------------------------
 async function saveClasses(req, res) {
-    const createProffy = require('.database/createProffy')
+    const createProffy = require('./database/createProffy')
 
     const proffyValue = {
         name: req.body.name,
@@ -72,9 +74,8 @@ async function saveClasses(req, res) {
             time_from: convertHoursToMinutes(req.body.time_from[index]),
             time_to: convertHoursToMinutes(req.body.time_from[index])
         }
-
     })
-
+       
     try {
         const db = await Database
         await createProffy(db, {proffyValue, classValue, classScheduleValues})
@@ -88,7 +89,7 @@ async function saveClasses(req, res) {
         console.log(error)
     }
     
-
+//<<<<<<---------------------------------------------------
 }
 
 module.exports = {

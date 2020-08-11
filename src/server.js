@@ -1,14 +1,11 @@
 //Servidor
-const Database = require('./database/db')
-
 const express = require('express')
 const server = express()
 
 const { pageLanding, pageStudy, pageGiveClasses, saveClasses } = require('./pages')
 
-//configurar nunjucks
+//template engine
 const nunjucks = require('nunjucks')
-const { query } = require('express')
 nunjucks.configure('src/views', {
     express: server,
     noCache: true,
@@ -24,6 +21,6 @@ server
 .get("/", pageLanding)
 .get("/study", pageStudy)
 .get("/give-classes", pageGiveClasses)
-.post("/save-class", saveClasses)
+.post("/save-classes", saveClasses)
 //start
 .listen(5500)
