@@ -29,7 +29,7 @@ async function pageStudy(req, res) {
             AND class_schedule.time_from <= ${timeToMinutes}
             AND class_schedule.time_to > ${timeToMinutes}
         )
-        AND classes.subject = '${filters.subject}' 
+        AND classes.subject = '${filters.subject}'
     `
 
     //caso houver erro na consulta ao db. Lembra da promessa?
@@ -38,9 +38,9 @@ async function pageStudy(req, res) {
         const db = await Database
         const proffys = await db.all(query)
 
-        proffys.map((proffy) => {
-            proffy.subject = getSubject(proffy.subject)
-        })
+       proffys.map((proffy) => {
+       proffy.subject = getSubject(proffy.subject)
+       })
         
         return res.render('study.html', { proffys, subjects, filters, weekdays })
 
@@ -53,9 +53,9 @@ async function pageStudy(req, res) {
 function pageGiveClasses(req, res) {
     return res.render("give-classes.html", {subjects, weekdays })
 }
-//<<------------------------------------------------------------------
+
 async function saveClasses(req, res) {
-    const createProffy = require('./database/createProffy')
+    const createProffy = require('./database/createProffy')  
 
     const proffyValue = {
         name: req.body.name,
@@ -72,7 +72,7 @@ async function saveClasses(req, res) {
         return {
             weekday,
             time_from: convertHoursToMinutes(req.body.time_from[index]),
-            time_to: convertHoursToMinutes(req.body.time_from[index])
+            time_to: convertHoursToMinutes(req.body.time_to[index])
         }
     })
        
@@ -89,7 +89,7 @@ async function saveClasses(req, res) {
         console.log(error)
     }
     
-//<<<<<<---------------------------------------------------
+
 }
 
 module.exports = {
